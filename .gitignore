@@ -1,3 +1,35 @@
+#Eclipse
+.project
+.classpath
+.settings
+.checkstyle
+
+#IntelliJ IDEA
+out
+.idea
+*.iml
+*.ipr
+# User settings
+*.iws
+classes
+gen-external-apklibs
+
+#Maven
+target
+release.properties
+pom.xml.*
+
+#Ant
+#build.xml
+#ant.properties
+local.properties
+#proguard.cfg
+#proguard-project.txt
+
+#Other
+.DS_Store
+tmp
+
 # built application files
 *.apk
 *.ap_
@@ -12,5 +44,3 @@
 bin/
 gen/
 
-# Local configuration file (sdk path, etc)
-local.properties
