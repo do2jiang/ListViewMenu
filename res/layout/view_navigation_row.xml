@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/navigation_row"
+                android:layout_width="fill_parent"
+                android:layout_height="52dip"
+                android:paddingTop="2dip"
+                android:paddingBottom="2dip"
+                android:paddingRight="3dip">
+
+    <ImageView android:id="@+id/navigation_icon"
+               android:layout_height="fill_parent"
+               android:layout_width="wrap_content"/>
+
+    <TextView android:id="@+id/navigation_title"
+              android:layout_height="wrap_content"
+              android:layout_width="fill_parent"
+              android:layout_toRightOf="@id/navigation_icon"
+              android:singleLine="true"/>
+</RelativeLayout>

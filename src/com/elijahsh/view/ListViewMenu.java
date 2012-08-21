@@ -21,8 +21,8 @@ import java.util.ArrayList;
  */
 
 public class ListViewMenu extends ListView implements Menu {
-    private final Context mContext;
-    private final Resources mResources;
+    private Context mContext;
+    private Resources mResources;
     /**
      * Default value for how added items should show in the action list.
      */
@@ -34,32 +34,27 @@ public class ListViewMenu extends ListView implements Menu {
      */
     private ArrayList<ListViewMenuItem> mItems;
 
-    public ListViewMenu(Context context) {
-        super(context);
-
+    private void initialize(Context context) {
         mContext = context;
         mResources = context.getResources();
 
         mItems = new ArrayList<ListViewMenuItem>();
+        setAdapter(new ListViewMenuAdapter(context, android.R.layout.simple_list_item_1, mItems));
+    }
 
+    public ListViewMenu(Context context) {
+        super(context);
+        initialize(context);
     }
 
     public ListViewMenu(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-        mContext = context;
-        mResources = context.getResources();
-
-        mItems = new ArrayList<ListViewMenuItem>();
+        initialize(context);
     }
 
     public ListViewMenu(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        mContext = context;
-        mResources = context.getResources();
-
-        mItems = new ArrayList<ListViewMenuItem>();
+        initialize(context);
     }
 
     /**
