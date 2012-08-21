@@ -66,7 +66,7 @@ public class ListViewMenu extends ListView implements Menu {
      * Adds an item to the menu.  The other add methods funnel to this.
      */
     private MenuItem addInternal(int group, int id, int categoryOrder, CharSequence title) {
-        final ListViewMenuItem item = new ListViewMenuItem();
+        final ListViewMenuItem item = new ListViewMenuItem(this, group, id, categoryOrder, 0, title, MenuItem.SHOW_AS_ACTION_ALWAYS);
 
         mItems.add(item);
 

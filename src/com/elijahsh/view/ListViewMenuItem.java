@@ -11,6 +11,10 @@ import android.view.*;
  * Time: 18:30
  */
 public class ListViewMenuItem implements MenuItem {
+    private static final int SHOW_AS_ACTION_MASK = SHOW_AS_ACTION_NEVER |
+            SHOW_AS_ACTION_IF_ROOM |
+            SHOW_AS_ACTION_ALWAYS;
+
     /**
      * Used for the icon resource ID if this item does not have an icon
      */
@@ -43,6 +47,10 @@ public class ListViewMenuItem implements MenuItem {
     private char mShortcutNumericChar;
     private char mShortcutAlphabeticChar;
     private int mShowAsAction = SHOW_AS_ACTION_WITH_TEXT; // If SHOW_AS_ACTION_NEVER then this is a group title
+    private boolean mVisible;
+    private boolean mEnabled;
+    private OnMenuItemClickListener mClickListener;
+    private ContextMenu.ContextMenuInfo mMenuInfo;
 
     public ListViewMenuItem(ListViewMenu menu, int group, int id, int categoryOrder, int ordering,
                             CharSequence title, int showAsAction) {
@@ -86,182 +94,237 @@ public class ListViewMenuItem implements MenuItem {
 
     @Override
     public CharSequence getTitle() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return mTitle;
     }
 
     @Override
     public MenuItem setTitleCondensed(CharSequence title) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mTitleCondensed = title;
+        //TODO mMenu.onItemsChanged(false);
+        return this;
     }
 
     @Override
     public CharSequence getTitleCondensed() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return mTitleCondensed;
     }
 
     @Override
     public MenuItem setIcon(Drawable icon) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mIconResId = NO_ICON;
+        mIconDrawable = icon;
+
+        //TODO mMenu.onItemsChanged(false);
+
+        return this;
     }
 
     @Override
     public MenuItem setIcon(int iconRes) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mIconDrawable = null;
+        mIconResId = iconRes;
+
+        // If we have a view, we need to push the Drawable to them
+        //TODO mMenu.onItemsChanged(false);
+
+        return this;
     }
 
     @Override
     public Drawable getIcon() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if (mIconDrawable != null) {
+            return mIconDrawable;
+        }
+
+        if (mIconResId != NO_ICON) {
+            return mMenu.getResources().getDrawable(mIconResId);
+        }
+
+        return null;
     }
 
     @Override
     public MenuItem setIntent(Intent intent) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mIntent = intent;
+        return this;
     }
 
     @Override
     public Intent getIntent() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return mIntent;
     }
 
     @Override
-    public android.view.MenuItem setShortcut(char numericChar, char alphaChar) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public MenuItem setShortcut(char numericChar, char alphaChar) {
+        mShortcutNumericChar = numericChar;
+        mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
+
+        //TODO mMenu.onItemsChanged(false);
+
+        return this;
     }
 
     @Override
     public MenuItem setNumericShortcut(char numericChar) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if (mShortcutNumericChar == numericChar) return this;
+
+        mShortcutNumericChar = numericChar;
+
+        //TODO mMenu.onItemsChanged(false);
+
+        return this;
     }
 
     @Override
     public char getNumericShortcut() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return mShortcutNumericChar;
     }
 
     @Override
     public MenuItem setAlphabeticShortcut(char alphaChar) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        if (mShortcutAlphabeticChar == alphaChar) return this;
+
+        mShortcutAlphabeticChar = Character.toLowerCase(alphaChar);
+
+        //TODO mMenu.onItemsChanged(false);
+
+        return this;
     }
 
     @Override
     public char getAlphabeticShortcut() {
-        return 0;  //To change body of implemented methods use File | Settings | File Templates.
+        return mShortcutAlphabeticChar;
     }
 
     @Override
     public MenuItem setCheckable(boolean checkable) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 
     @Override
     public boolean isCheckable() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public MenuItem setChecked(boolean checked) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 
     @Override
     public boolean isChecked() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public MenuItem setVisible(boolean visible) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mVisible = visible;
+        return this;
     }
 
     @Override
     public boolean isVisible() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return mVisible;
     }
 
     @Override
     public MenuItem setEnabled(boolean enabled) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mEnabled = enabled;
+        return this;
     }
-
 
     @Override
     public boolean isEnabled() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return mEnabled;
     }
 
     @Override
     public boolean hasSubMenu() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public SubMenu getSubMenu() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public MenuItem setOnMenuItemClickListener(OnMenuItemClickListener menuItemClickListener) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        mClickListener = menuItemClickListener;
+        return this;
     }
 
     @Override
     public ContextMenu.ContextMenuInfo getMenuInfo() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return mMenuInfo;
     }
 
     @Override
     public void setShowAsAction(int actionEnum) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        switch (actionEnum & SHOW_AS_ACTION_MASK) {
+            case SHOW_AS_ACTION_ALWAYS:
+            case SHOW_AS_ACTION_IF_ROOM:
+            case SHOW_AS_ACTION_NEVER:
+                // Looks good!
+                break;
+
+            default:
+                // Mutually exclusive options selected!
+                throw new IllegalArgumentException("SHOW_AS_ACTION_ALWAYS, SHOW_AS_ACTION_IF_ROOM,"
+                        + " and SHOW_AS_ACTION_NEVER are mutually exclusive.");
+        }
+        mShowAsAction = actionEnum;
+        //TODO mMenu.onItemActionRequestChanged(this);
     }
 
     @Override
     public MenuItem setShowAsActionFlags(int actionEnum) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        setShowAsAction(actionEnum);
+        return this;
     }
 
     @Override
     public MenuItem setActionView(View view) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 
     @Override
     public MenuItem setActionView(int resId) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 
     @Override
     public View getActionView() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public MenuItem setActionProvider(ActionProvider actionProvider) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 
     @Override
     public ActionProvider getActionProvider() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     @Override
     public boolean expandActionView() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public boolean collapseActionView() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public boolean isActionViewExpanded() {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+        return false;
     }
 
     @Override
     public MenuItem setOnActionExpandListener(OnActionExpandListener listener) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return this;
     }
 }
