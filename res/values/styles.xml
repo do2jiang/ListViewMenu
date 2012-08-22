@@ -1,4 +1,13 @@
 <resources>
+    <style name="ListViewMenu">
+        <item name="android:dividerHeight">1dip</item>
+    </style>
+
+    <style name="ListViewMenu.Dark">
+        <item name="android:divider">@color/ListViewMenu.Divider.Dark</item>
+        <item name="android:cacheColorHint">@android:color/black</item>
+    </style>
+
     <style name="ListViewMenu.TextAppearance.Normal" parent="@android:style/TextAppearance.Medium.Inverse">
         <item name="android:textStyle">bold</item>
     </style>

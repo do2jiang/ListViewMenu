@@ -2,5 +2,5 @@
     <color name="ListViewMenu.Background">#333333</color>
     <color name="ListViewMenu.Background.Pressed">#fffeaa0c</color>
     <color name="ListViewMenu.Background.Selected">#fff17a0a</color>
-    <color name="ListViewMenu.Divider">@android:color/black</color>
+    <color name="ListViewMenu.Divider.Dark">@android:color/black</color>
 </resources>
