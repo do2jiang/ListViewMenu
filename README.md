@@ -1,8 +1,8 @@
 ListViewMenu
 ============
 
-Implementation of standard android.view.Menu interface for Sliding navigation UI pattern.
-
+Implementation of standard android.view.Menu interface for Sliding navigation UI pattern. Sliding UI pattern realization
+[SlidingMenu][1]
 Usage
 -----
 Define standard android menu resource. Disabled (android:enabled="false") items will render as separators/headers.
@@ -50,3 +50,4 @@ License
     See the License for the specific language governing permissions and
     limitations under the License.
 
+ [1]: https://github.com/jfeinstein10/SlidingMenu
