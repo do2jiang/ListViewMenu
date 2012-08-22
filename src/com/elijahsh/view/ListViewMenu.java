@@ -5,10 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.util.AttributeSet;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.SubMenu;
+import android.util.Log;
+import android.view.*;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,13 +20,27 @@ import java.util.ArrayList;
  */
 
 public class ListViewMenu extends ListView implements Menu {
+
+    public static interface OnMenuClickListener  {
+        void onClick(MenuItem menuItem);
+    }
+
     private Context mContext;
     private Resources mResources;
+    private OnMenuClickListener mMenuClickListener;
+    private OnItemClickListener mListViewClickListener = new OnItemClickListener() {
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            Log.d("Nav", "Click!");
+            if (mMenuClickListener != null) {
+                mMenuClickListener.onClick(getItem(position));
+            }
+        }
+    };
+
     /**
      * Default value for how added items should show in the action list.
      */
     private int mDefaultShowAsAction = MenuItem.SHOW_AS_ACTION_NEVER;
-
 
     /**
      * Contains all of the items for this menu
@@ -40,6 +53,8 @@ public class ListViewMenu extends ListView implements Menu {
 
         mItems = new ArrayList<ListViewMenuItem>();
         setAdapter(new ListViewMenuAdapter(context, mItems));
+
+        setOnItemClickListener(mListViewClickListener);
     }
 
     public ListViewMenu(Context context) {
@@ -206,5 +221,13 @@ public class ListViewMenu extends ListView implements Menu {
     @Override
     public void setQwertyMode(boolean isQwerty) {
         // Do nothing.
+    }
+
+    public OnMenuClickListener getMenuClickListener() {
+        return mMenuClickListener;
+    }
+
+    public void setMenuClickListener(OnMenuClickListener clickListener) {
+        this.mMenuClickListener = clickListener;
     }
 }
