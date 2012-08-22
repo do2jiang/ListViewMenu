@@ -18,15 +18,22 @@ import java.util.List;
  * Time: 19:27
  */
 public class ListViewMenuAdapter extends ArrayAdapter<ListViewMenuItem> {
+    private final int TYPE_SEPARATOR = 0;
+    private final int TYPE_ITEM = 1;
+    private final int TYPE_COUNT = TYPE_ITEM + 1;
+
     private Context mContext;
-    private int mLayoutResourceId;
     private LayoutInflater mInflater;
 
     public ListViewMenuAdapter(Context context, List<ListViewMenuItem> objects) {
         super(context, 0, objects);
         mContext = context;
-        mLayoutResourceId = R.layout.view_navigation_row;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return getItem(position).isEnabled();
     }
 
     static private class ViewHolder {
@@ -36,28 +43,43 @@ public class ListViewMenuAdapter extends ArrayAdapter<ListViewMenuItem> {
 
     @Override
     public int getViewTypeCount() {
-        return 1;
+        return TYPE_COUNT;
     }
 
     @Override
     public int getItemViewType(int position) {
-        return 0;
+        return getItem(position).isEnabled() ? TYPE_ITEM : TYPE_SEPARATOR;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
         ViewHolder viewHolder;
+        int viewType = getItemViewType(position);
         if (rowView == null) {
-            rowView = mInflater.inflate(mLayoutResourceId, parent, false);
             viewHolder = new ViewHolder();
-            viewHolder.icon = (ImageView) rowView.findViewById(R.id.navigation_icon);
-            viewHolder.title = (TextView) rowView.findViewById(R.id.navigation_title);
+            switch (viewType) {
+                case TYPE_SEPARATOR:
+                    rowView = mInflater.inflate(R.layout.view_separator_row, parent, false);
+                    //viewHolder.icon = (ImageView) rowView.findViewById(R.id.navigation_icon);
+                    viewHolder.title = (TextView) rowView.findViewById(R.id.separator_title);
+                    rowView.setTag(viewHolder);
+                    break;
+
+                case TYPE_ITEM:
+                    rowView = mInflater.inflate(R.layout.view_item_row, parent, false);
+                    viewHolder.icon = (ImageView) rowView.findViewById(R.id.item_icon);
+                    viewHolder.title = (TextView) rowView.findViewById(R.id.item_title);
+                    rowView.setTag(viewHolder);
+                    break;
+            }
+
         } else {
-            viewHolder = (ViewHolder)rowView.getTag();
+            viewHolder = (ViewHolder) rowView.getTag();
         }
 
-        viewHolder.icon.setImageDrawable(getItem(position).getIcon());
+        if (viewHolder.icon != null)
+            viewHolder.icon.setImageDrawable(getItem(position).getIcon());
         viewHolder.title.setText(getItem(position).getTitle());
         return rowView;
     }

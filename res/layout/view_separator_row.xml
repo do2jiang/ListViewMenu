@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/separator_row"
+              android:layout_width="fill_parent"
+              android:layout_height="48dip"
+              android:paddingLeft="16dip"
+              android:background="@drawable/sel_listview_row_background">
+    <TextView android:id="@+id/separator_title"
+              android:layout_height="fill_parent"
+              android:layout_width="fill_parent"
+              android:paddingRight="8dip"
+              android:singleLine="true"
+              android:gravity="bottom"
+              android:background="@android:color/transparent"
+              android:textAppearance="@style/ListViewMenu.TextAppearance.Separator"/>
+
+</LinearLayout>
