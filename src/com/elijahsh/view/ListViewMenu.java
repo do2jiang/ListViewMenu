@@ -39,7 +39,7 @@ public class ListViewMenu extends ListView implements Menu {
         mResources = context.getResources();
 
         mItems = new ArrayList<ListViewMenuItem>();
-        setAdapter(new ListViewMenuAdapter(context, android.R.layout.simple_list_item_1, mItems));
+        setAdapter(new ListViewMenuAdapter(context, mItems));
     }
 
     public ListViewMenu(Context context) {

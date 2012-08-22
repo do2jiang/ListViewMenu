@@ -1,0 +1,5 @@
+<resources>
+    <style name="ListViewMenu.TextAppearance.Normal" parent="@android:style/TextAppearance.Medium.Inverse">
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

@@ -21,39 +21,10 @@ public class ListViewMenuAdapter extends ArrayAdapter<ListViewMenuItem> {
     private Context mContext;
     private int mLayoutResourceId;
 
-    private void initialize(Context context, int viewResourceId) {
+    public ListViewMenuAdapter(Context context, List<ListViewMenuItem> objects) {
+        super(context, 0, objects);
         mContext = context;
         mLayoutResourceId = R.layout.view_navigation_row;
-    }
-
-    public ListViewMenuAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
-        initialize(context, textViewResourceId);
-    }
-
-    public ListViewMenuAdapter(Context context, int resource, int textViewResourceId) {
-        super(context, resource, textViewResourceId);
-        initialize(context, textViewResourceId);
-    }
-
-    public ListViewMenuAdapter(Context context, int textViewResourceId, ListViewMenuItem[] objects) {
-        super(context, textViewResourceId, objects);
-        initialize(context, textViewResourceId);
-    }
-
-    public ListViewMenuAdapter(Context context, int resource, int textViewResourceId, ListViewMenuItem[] objects) {
-        super(context, resource, textViewResourceId, objects);
-        initialize(context, textViewResourceId);
-    }
-
-    public ListViewMenuAdapter(Context context, int textViewResourceId, List<ListViewMenuItem> objects) {
-        super(context, textViewResourceId, objects);
-        initialize(context, textViewResourceId);
-    }
-
-    public ListViewMenuAdapter(Context context, int resource, int textViewResourceId, List<ListViewMenuItem> objects) {
-        super(context, resource, textViewResourceId, objects);
-        initialize(context, textViewResourceId);
     }
 
     @Override
