@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Main" android:enabled="false"/>
+    <item android:id="@+id/nav_accounts" android:icon="@drawable/ic_launcher" android:title="Accounts"/>
+    <item android:id="@+id/nav_categories" android:icon="@drawable/ic_launcher" android:title="Categories"/>
+    <item android:id="@+id/nav_planning" android:icon="@drawable/ic_launcher" android:title="Planning"/>
+
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Test"/>
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Test" android:enabled="false"/>
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Test"/>
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Test"/>
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Test"/>
+    <item android:id="@+id/nav_home" android:icon="@drawable/ic_launcher" android:title="Test"/>
+</menu>

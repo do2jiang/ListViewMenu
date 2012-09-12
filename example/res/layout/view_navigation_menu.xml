@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.elijahsh.view.ListViewMenu xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:id="@+id/navigation_menu"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                style="@style/ListViewMenu.Dark"/>
+
